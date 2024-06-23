@@ -1,0 +1,48 @@
+-- Criação da tabela de academias
+CREATE TABLE Academia (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    endereco VARCHAR(255),
+    telefone VARCHAR(20)
+);
+
+-- Criação da tabela de alunos
+CREATE TABLE Aluno (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    data_nascimento DATE,
+    endereco VARCHAR(255),
+    telefone VARCHAR(20),
+    email VARCHAR(255),
+    id_academia INT,
+    FOREIGN KEY (id_academia) REFERENCES Academia(id)
+);
+
+-- Criação da tabela de funcionários
+CREATE TABLE Funcionario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    cargo VARCHAR(255),
+    telefone VARCHAR(20),
+    email VARCHAR(255),
+    id_academia INT,
+    FOREIGN KEY (id_academia) REFERENCES Academia(id)
+);
+
+-- Criação da tabela de acessos
+CREATE TABLE Acesso (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_hora_entrada DATETIME,
+    data_hora_saida DATETIME,
+    id_aluno INT,
+    FOREIGN KEY (id_aluno) REFERENCES Aluno(id)
+);
+
+-- Criação da tabela de mensalidades
+CREATE TABLE Mensalidade (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    data_vencimento DATE,
+    valor DECIMAL(10, 2),
+    id_aluno INT,
+    FOREIGN KEY (id_aluno) REFERENCES Aluno(id)
+);
